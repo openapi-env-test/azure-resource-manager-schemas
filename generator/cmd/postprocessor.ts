@@ -12,11 +12,11 @@ async function getChangedSchemas(repoPath: string) {
     const status = await git.status(repo);
     for (const stat of status) {
         if (path.basename(path.dirname(path.dirname(stat.path))) === 'schemas'
-            && path.extname(stat.path) === 'json') {
+            && path.extname(stat.path) === '.json') {
             if (stat.status !== 'modified' && stat.status !== 'new') {
                 throw new Error(`Undefined file status for '${stat.path}'.`);
             } else {
-                changedSchemas.push(stat.path);
+                changedSchemas.push(path.join(repoPath, stat.path));
             }
         }
     }
