@@ -1,10 +1,6 @@
 {
   "$schema": "https://openapistorageprod.blob.core.windows.net/sdkautomation/prod/schemas/swagger_to_sdk_config.schema.json",
   "meta": {
-    "after_scripts_in_repo": [
-        "npm install --prefix generator",
-        "npm run postprocessor --prefix generator"
-    ],
     "autorest_options": {
       "use": "@autorest/azureresourceschema@3.0.79",
       "version": "3.0.6274",

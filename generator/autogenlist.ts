@@ -570,11 +570,3 @@ export function getAutogenlist(): AutogenlistConfig[] {
 export function findAutogenEntries(basePath: string): AutogenlistConfig[] {
     return autogenlist.filter(w => lowerCaseEquals(w.basePath, basePath));
 }
-
-export function findAutogenEntriesByNamespace(namespace: string): AutogenlistConfig {
-    const autogenlistConfig = autogenlist.filter(w => lowerCaseEquals(w.namespace, namespace));
-    if (autogenlistConfig.length !== 1) {
-        throw new Error(`Namespace ${namespace} has no or more than one AutogenlistConfig`);
-    }
-    return autogenlistConfig[0];
-}
