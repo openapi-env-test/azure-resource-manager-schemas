@@ -80,87 +80,6 @@
       ],
       "description": "Microsoft.Cdn/CdnWebApplicationFirewallPolicies"
     },
-    "profiles": {
-      "type": "object",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2020-04-15"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the CDN profile which is unique within the resource group."
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/ProfileProperties"
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "The JSON object that contains the properties required to create a profile."
-        },
-        "resources": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/profiles_endpoints_childResource"
-              }
-            ]
-          }
-        },
-        "sku": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Sku"
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile."
-        },
-        "tags": {
-          "oneOf": [
-            {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "properties": {}
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "Resource tags."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Cdn/profiles"
-          ]
-        }
-      },
-      "required": [
-        "apiVersion",
-        "location",
-        "name",
-        "properties",
-        "sku",
-        "type"
-      ],
-      "description": "Microsoft.Cdn/profiles"
-    },
     "profiles_endpoints": {
       "type": "object",
       "properties": {
@@ -595,9 +514,7 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
-        "operator",
-        "selector"
+        "operator"
       ],
       "description": "Defines the parameters for Cookies match conditions"
     },
@@ -1993,7 +1910,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for HttpVersion match conditions"
@@ -2078,7 +1994,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for IsDevice match conditions"
@@ -2682,75 +2597,9 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
-        "operator",
-        "selector"
+        "operator"
       ],
       "description": "Defines the parameters for PostArgs match conditions"
-    },
-    "ProfileProperties": {
-      "type": "object",
-      "properties": {},
-      "description": "The JSON object that contains the properties required to create a profile."
-    },
-    "profiles_endpoints_childResource": {
-      "type": "object",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2020-04-15"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the endpoint under the profile which is unique globally."
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/EndpointProperties"
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "The JSON object that contains the properties required to create an endpoint."
-        },
-        "tags": {
-          "oneOf": [
-            {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "properties": {}
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "Resource tags."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "endpoints"
-          ]
-        }
-      },
-      "required": [
-        "apiVersion",
-        "location",
-        "name",
-        "properties",
-        "type"
-      ],
-      "description": "Microsoft.Cdn/profiles/endpoints"
     },
     "profiles_endpoints_customDomains_childResource": {
       "type": "object",
@@ -2953,7 +2802,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for QueryString match conditions"
@@ -3158,7 +3006,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for RemoteAddress match conditions"
@@ -3247,7 +3094,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for RequestBody match conditions"
@@ -3340,9 +3186,7 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
-        "operator",
-        "selector"
+        "operator"
       ],
       "description": "Defines the parameters for RequestHeader match conditions"
     },
@@ -3413,7 +3257,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for RequestMethod match conditions"
@@ -3480,7 +3323,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for RequestScheme match conditions "
@@ -3569,7 +3411,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for RequestUri match conditions"
@@ -3743,7 +3584,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for UrlFileExtension match conditions"
@@ -3832,7 +3672,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for UrlFilename match conditions"
@@ -3922,7 +3761,6 @@
       },
       "required": [
         "@odata.type",
-        "matchValues",
         "operator"
       ],
       "description": "Defines the parameters for UrlPath match conditions"
