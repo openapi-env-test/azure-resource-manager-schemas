@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2020-04-01/Microsoft.DataBox.json#",
+  "id": "https://schema.management.azure.com/schemas/2020-11-01/Microsoft.DataBox.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.DataBox",
   "description": "Microsoft DataBox Resource Types",
@@ -10,7 +10,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-01"
+            "2020-11-01"
           ]
         },
         "identity": {
@@ -406,6 +406,27 @@
       ],
       "description": "Details of the data to be used for importing data to azure."
     },
+    "EncryptionPreferences": {
+      "type": "object",
+      "properties": {
+        "doubleEncryption": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Defines secondary layer of software-based encryption enablement."
+        }
+      },
+      "description": "Preferences related to the Encryption."
+    },
     "FilterFileDetails": {
       "type": "object",
       "properties": {
@@ -667,6 +688,17 @@
     "Preferences": {
       "type": "object",
       "properties": {
+        "encryptionPreferences": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/EncryptionPreferences"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Preferences related to the Encryption."
+        },
         "preferredDataCenterRegion": {
           "oneOf": [
             {
@@ -701,6 +733,21 @@
         "type": {
           "type": "string",
           "description": "Identity type"
+        },
+        "userAssignedIdentities": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/UserAssignedIdentity"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "User Assigned Identities"
         }
       },
       "description": "Msi identity details of the resource"
@@ -763,7 +810,6 @@
       },
       "required": [
         "country",
-        "postalCode",
         "streetAddress1"
       ],
       "description": "Shipping address where customer wishes to receive the device."
@@ -1030,6 +1076,11 @@
         "preferredShipmentType"
       ],
       "description": "Preferences related to the shipment logistics of the sku"
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {},
+      "description": "Class defining User assigned identity details."
     }
   }
 }
