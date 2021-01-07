@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2020-06-01/Microsoft.NetApp.json#",
+  "id": "https://schema.management.azure.com/schemas/2020-09-01/Microsoft.NetApp.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.NetApp",
   "description": "Microsoft NetApp Resource Types",
@@ -10,7 +10,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -85,7 +85,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -144,7 +144,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -223,7 +223,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -305,7 +305,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -349,7 +349,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -393,7 +393,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -481,6 +481,17 @@
           "maxLength": 64,
           "description": "Name of the active directory machine. This optional parameter is used only while creating kerberos volume"
         },
+        "aesEncryption": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "If enabled, AES encryption will be enabled for SMB communication."
+        },
         "backupOperators": {
           "oneOf": [
             {
@@ -523,6 +534,17 @@
           ],
           "description": "kdc server IP addresses for the active directory machine. This optional parameter is used only while creating kerberos volume."
         },
+        "ldapSigning": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies whether or not the LDAP traffic needs to be signed."
+        },
         "organizationalUnit": {
           "type": "string",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
@@ -530,6 +552,20 @@
         "password": {
           "type": "string",
           "description": "Plain text password of Active Directory domain administrator, value is masked in the response"
+        },
+        "securityOperators": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier"
         },
         "serverRootCACertificate": {
           "type": "string",
@@ -984,7 +1020,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1043,7 +1079,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1112,7 +1148,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1156,7 +1192,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1225,7 +1261,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1269,7 +1305,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -1697,6 +1733,30 @@
             }
           ],
           "description": "The service level of the file system."
+        },
+        "smbContinuouslyAvailable": {
+          "oneOf": [
+            {
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume"
+        },
+        "smbEncryption": {
+          "oneOf": [
+            {
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later"
         },
         "snapshotDirectoryVisible": {
           "oneOf": [
