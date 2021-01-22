@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2020-03-01/Microsoft.Batch.json#",
+  "id": "https://schema.management.azure.com/schemas/2021-01-01/Microsoft.Batch.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Batch",
   "description": "Microsoft Batch Resource Types",
@@ -10,8 +10,19 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
+        },
+        "identity": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BatchAccountIdentity"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The identity of the Batch account, if configured. This is only used when the user specifies 'Microsoft.KeyVault' as their Batch account encryption configuration."
         },
         "location": {
           "type": "string",
@@ -95,7 +106,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -154,7 +165,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -203,7 +214,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -252,8 +263,19 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
+        },
+        "identity": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BatchPoolIdentity"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The identity of the Batch pool, if configured. If the pool identity is updated during update an existing pool, only the new vms which are created after the pool shrinks to 0 will have the updated identities"
         },
         "name": {
           "oneOf": [
@@ -489,7 +511,8 @@
             {
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
-          ]
+          ],
+          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead."
         },
         "keyVaultReference": {
           "oneOf": [
@@ -535,13 +558,53 @@
       },
       "description": "The properties of a Batch account."
     },
+    "BatchAccountIdentity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned",
+                "None"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The type of identity used for the Batch account."
+        },
+        "userAssignedIdentities": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Components19e4rl9schemasbatchaccountidentitypropertiesuserassignedidentitiesadditionalproperties"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "The identity of the Batch account, if configured. This is only used when the user specifies 'Microsoft.KeyVault' as their Batch account encryption configuration."
+    },
     "batchAccounts_applications_childResource": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -590,7 +653,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -639,7 +702,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
         },
         "name": {
@@ -688,8 +751,19 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-03-01"
+            "2021-01-01"
           ]
+        },
+        "identity": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BatchPoolIdentity"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The identity of the Batch pool, if configured. If the pool identity is updated during update an existing pool, only the new vms which are created after the pool shrinks to 0 will have the updated identities"
         },
         "name": {
           "oneOf": [
@@ -730,6 +804,45 @@
         "type"
       ],
       "description": "Microsoft.Batch/batchAccounts/pools"
+    },
+    "BatchPoolIdentity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "UserAssigned",
+                "None"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The type of identity used for the Batch Pool."
+        },
+        "userAssignedIdentities": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Components81xseeschemasbatchpoolidentitypropertiesuserassignedidentitiesadditionalproperties"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "The identity of the Batch pool, if configured. If the pool identity is updated during update an existing pool, only the new vms which are created after the pool shrinks to 0 will have the updated identities"
     },
     "CertificateCreateOrUpdateProperties": {
       "type": "object",
@@ -863,6 +976,14 @@
         "osFamily"
       ]
     },
+    "Components19e4rl9schemasbatchaccountidentitypropertiesuserassignedidentitiesadditionalproperties": {
+      "type": "object",
+      "properties": {}
+    },
+    "Components81xseeschemasbatchpoolidentitypropertiesuserassignedidentitiesadditionalproperties": {
+      "type": "object",
+      "properties": {}
+    },
     "ContainerConfiguration": {
       "type": "object",
       "properties": {
@@ -969,7 +1090,7 @@
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
           ],
-          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive."
         },
         "storageAccountType": {
           "oneOf": [
@@ -1068,9 +1189,11 @@
             {
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
-          ]
+          ],
+          "description": "KeyVault configuration when using an encryption KeySource of Microsoft.KeyVault."
         }
-      }
+      },
+      "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead."
     },
     "EnvironmentSetting": {
       "type": "object",
@@ -1242,9 +1365,10 @@
       "properties": {
         "keyIdentifier": {
           "type": "string",
-          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053"
+          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled"
         }
-      }
+      },
+      "description": "KeyVault configuration when using an encryption KeySource of Microsoft.KeyVault."
     },
     "KeyVaultReference": {
       "type": "object",
@@ -1460,6 +1584,27 @@
         "source"
       ]
     },
+    "NodePlacementConfiguration": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Regional",
+                "Zonal"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
+        }
+      },
+      "description": "Allocation configuration used by Batch Service to provision the nodes."
+    },
     "PoolEndpointConfiguration": {
       "type": "object",
       "properties": {
@@ -1475,7 +1620,7 @@
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
           ],
-          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400."
+          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses."
         }
       },
       "required": [
@@ -1556,17 +1701,6 @@
           ],
           "description": "This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'."
         },
-        "maxTasksPerNode": {
-          "oneOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
-        },
         "metadata": {
           "oneOf": [
             {
@@ -1638,6 +1772,17 @@
             }
           ]
         },
+        "taskSlotsPerNode": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
+        },
         "userAccounts": {
           "oneOf": [
             {
@@ -1673,7 +1818,7 @@
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
           ],
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         },
         "provision": {
           "oneOf": [
@@ -1998,6 +2143,20 @@
           ],
           "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Virtual Machine Image or Shared Image Gallery Image."
         },
+        "extensions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VMExtension"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
+        },
         "imageReference": {
           "oneOf": [
             {
@@ -2016,6 +2175,17 @@
           "type": "string",
           "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems. You must specify a node agent SKU which matches the selected image reference. To get the list of supported node agent SKUs along with their list of verified image references, see the 'List supported node agent SKUs' operation."
         },
+        "nodePlacementConfiguration": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NodePlacementConfiguration"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Allocation configuration used by Batch Service to provision the nodes."
+        },
         "windowsConfiguration": {
           "oneOf": [
             {
@@ -2030,6 +2200,62 @@
       "required": [
         "imageReference",
         "nodeAgentSkuId"
+      ]
+    },
+    "VMExtension": {
+      "type": "object",
+      "properties": {
+        "autoUpgradeMinorVersion": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "name": {
+          "type": "string"
+        },
+        "protectedSettings": {
+          "type": "object",
+          "properties": {},
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. "
+        },
+        "provisionAfterExtensions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Collection of extension names after which this extension needs to be provisioned."
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "object",
+          "properties": {}
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeHandlerVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "type"
       ]
     },
     "WindowsConfiguration": {
