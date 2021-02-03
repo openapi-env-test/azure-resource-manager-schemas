@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2019-06-01/Microsoft.Storage.json#",
+  "id": "https://schema.management.azure.com/schemas/2020-08-01-preview/Microsoft.Storage.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Storage",
   "description": "Microsoft Storage Resource Types",
@@ -10,8 +10,19 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
+        },
+        "extendedLocation": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExtendedLocation"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The complex type of the extended location."
         },
         "identity": {
           "oneOf": [
@@ -147,7 +158,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -204,7 +215,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -255,7 +266,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -302,7 +313,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -343,7 +354,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -400,7 +411,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -441,7 +452,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -499,7 +510,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -546,7 +557,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -586,7 +597,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -625,7 +636,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -682,7 +693,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -730,7 +741,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -787,7 +798,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -1678,6 +1689,30 @@
       },
       "description": "A list of services that support encryption."
     },
+    "ExtendedLocation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "EdgeZone"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The type of the extended location."
+        }
+      },
+      "description": "The complex type of the extended location."
+    },
     "FileServicePropertiesProperties": {
       "type": "object",
       "properties": {
@@ -1691,6 +1726,17 @@
             }
           ],
           "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
+        },
+        "protocolSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ProtocolSettings"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Protocol settings for file service"
         },
         "shareDeleteRetentionPolicy": {
           "oneOf": [
@@ -2286,6 +2332,23 @@
       },
       "description": "Management policy action for blob version."
     },
+    "Multichannel": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Indicates whether multichannel is enabled"
+        }
+      },
+      "description": "Multichannel setting. Applies to Premium FileStorage only."
+    },
     "NetworkRuleSet": {
       "type": "object",
       "properties": {
@@ -2334,6 +2397,19 @@
             }
           ],
           "description": "Sets the IP ACL rules"
+        },
+        "resourceAccessRules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceAccessRule"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ]
         },
         "virtualNetworkRules": {
           "oneOf": [
@@ -2527,6 +2603,23 @@
       },
       "description": "A collection of information about the state of the connection between service consumer and provider."
     },
+    "ProtocolSettings": {
+      "type": "object",
+      "properties": {
+        "smb": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SmbSetting"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Setting for SMB protocol"
+        }
+      },
+      "description": "Protocol settings for file service"
+    },
     "QueueProperties": {
       "type": "object",
       "properties": {
@@ -2563,6 +2656,20 @@
         }
       },
       "description": "The properties of a storage account’s Queue service."
+    },
+    "ResourceAccessRule": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        }
+      },
+      "description": "Resource Access Rule."
     },
     "RestorePolicyProperties": {
       "type": "object",
@@ -2682,6 +2789,23 @@
         "name"
       ],
       "description": "The SKU of the storage account."
+    },
+    "SmbSetting": {
+      "type": "object",
+      "properties": {
+        "multichannel": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Multichannel"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Multichannel setting. Applies to Premium FileStorage only."
+        }
+      },
+      "description": "Setting for SMB protocol"
     },
     "StorageAccountPropertiesCreateParameters": {
       "type": "object",
@@ -2840,7 +2964,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -2882,7 +3006,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -2923,7 +3047,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -2965,7 +3089,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3006,7 +3130,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3048,7 +3172,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3089,7 +3213,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3142,7 +3266,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3184,7 +3308,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3224,7 +3348,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3263,7 +3387,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3305,7 +3429,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3353,7 +3477,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
@@ -3395,7 +3519,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-06-01"
+            "2020-08-01-preview"
           ]
         },
         "name": {
