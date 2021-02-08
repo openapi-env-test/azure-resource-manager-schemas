@@ -62,16 +62,6 @@
           "enum": [
             "Microsoft.Resources/deployments"
           ]
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription to deploy to"
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group to deploy to",
-          "pattern": "^[-\\w\\._\\(\\)]+$",
-          "maxLength": 90
         }
       },
       "required": [
@@ -142,12 +132,6 @@
           "enum": [
             "Microsoft.Resources/deployments"
           ]
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group to deploy to",
-          "pattern": "^[-\\w\\._\\(\\)]+$",
-          "maxLength": 90
         }
       },
       "required": [
@@ -157,61 +141,6 @@
         "type"
       ],
       "description": "Microsoft.Resources/deployments"
-    },
-    "resourceGroups": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "oneOf": [
-            {
-              "type": "string",
-              "pattern": "^[-\\w\\._\\(\\)]+$",
-              "maxLength": 90,
-              "description": "the resource group name"
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ]
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Resources/resourceGroups"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2020-06-01"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "the resource group location"
-        },
-        "tags": {
-          "oneOf": [
-            {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "The resource group tags."
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "apiVersion",
-        "location"
-      ],
-      "description": "Microsoft.Resources/resourceGroups"
     }
   },
   "managementGroup_resourceDefinitions": {
@@ -273,10 +202,6 @@
           "enum": [
             "Microsoft.Resources/deployments"
           ]
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription to deploy to"
         }
       },
       "required": [
@@ -348,10 +273,6 @@
           "enum": [
             "Microsoft.Resources/deployments"
           ]
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription to deploy to"
         }
       },
       "required": [
@@ -500,6 +421,17 @@
           ],
           "description": "The debug setting."
         },
+        "expressionEvaluationOptions": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExpressionEvaluationOptions"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+        },
         "mode": {
           "oneOf": [
             {
@@ -563,6 +495,28 @@
         "mode"
       ],
       "description": "Deployment properties."
+    },
+    "ExpressionEvaluationOptions": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "NotSpecified",
+                "Outer",
+                "Inner"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The scope to be used for evaluation of parameters, variables and functions in a nested template."
+        }
+      },
+      "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
     },
     "OnErrorDeployment": {
       "type": "object",
