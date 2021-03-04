@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2020-06-01-preview/Microsoft.DocumentDB.json#",
+  "id": "https://schema.management.azure.com/schemas/2021-03-01-preview/Microsoft.DocumentDB.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.DocumentDB",
   "description": "Microsoft DocumentDB Resource Types",
@@ -10,7 +10,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -96,6 +96,9 @@
               },
               {
                 "$ref": "#/definitions/databaseAccounts_notebookWorkspaces_childResource"
+              },
+              {
+                "$ref": "#/definitions/databaseAccounts_privateEndpointConnections_childResource"
               }
             ]
           }
@@ -136,7 +139,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -218,7 +221,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -297,7 +300,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -373,7 +376,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -449,7 +452,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -531,7 +534,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -610,7 +613,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -686,7 +689,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -762,7 +765,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -844,7 +847,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -923,7 +926,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -999,7 +1002,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1075,7 +1078,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -1104,13 +1107,52 @@
       ],
       "description": "Microsoft.DocumentDB/databaseAccounts/notebookWorkspaces"
     },
+    "databaseAccounts_privateEndpointConnections": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2021-03-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the private endpoint connection."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of a private endpoint connection."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DocumentDB/databaseAccounts/privateEndpointConnections"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.DocumentDB/databaseAccounts/privateEndpointConnections"
+    },
     "databaseAccounts_sqlDatabases": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1192,7 +1234,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1280,7 +1322,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1349,7 +1391,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1425,7 +1467,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1494,7 +1536,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1563,7 +1605,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1639,7 +1681,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -1678,7 +1720,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -1717,7 +1759,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1796,7 +1838,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -1877,7 +1919,8 @@
               "type": "string",
               "enum": [
                 "3.2",
-                "3.6"
+                "3.6",
+                "4.0"
               ]
             },
             {
@@ -2002,7 +2045,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace."
@@ -2105,7 +2147,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB Cassandra table."
@@ -2196,8 +2237,8 @@
             {
               "type": "string",
               "enum": [
-                "Ascending",
-                "Descending"
+                "ascending",
+                "descending"
               ]
             },
             {
@@ -2303,14 +2344,15 @@
               "type": "string",
               "enum": [
                 "Hash",
-                "Range"
+                "Range",
+                "MultiHash"
               ]
             },
             {
               "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
             }
           ],
-          "description": "Indicates the kind of algorithm used for partitioning."
+          "description": "Indicates the kind of algorithm used for partitioning. For MultiHash, multiple partition keys (upto three maximum) are supported for container create."
         },
         "paths": {
           "oneOf": [
@@ -2630,6 +2672,35 @@
           ],
           "description": "An array that contains the georeplication locations enabled for the Cosmos DB account."
         },
+        "networkAclBypass": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "None",
+                "AzureServices"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Indicates what services are allowed to bypass firewall checks."
+        },
+        "networkAclBypassResourceIds": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "An array that contains the Resource Ids for Network Acl Bypass for the Cosmos DB account."
+        },
         "publicNetworkAccess": {
           "oneOf": [
             {
@@ -2672,7 +2743,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -2741,7 +2812,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -2810,7 +2881,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -2881,7 +2952,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -2952,7 +3023,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3021,7 +3092,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3090,7 +3161,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3161,7 +3232,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3232,7 +3303,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3301,7 +3372,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3370,7 +3441,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3441,7 +3512,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3512,7 +3583,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -3536,13 +3607,52 @@
       ],
       "description": "Microsoft.DocumentDB/databaseAccounts/notebookWorkspaces"
     },
+    "databaseAccounts_privateEndpointConnections_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2021-03-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the private endpoint connection."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of a private endpoint connection."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "privateEndpointConnections"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.DocumentDB/databaseAccounts/privateEndpointConnections"
+    },
     "databaseAccounts_sqlDatabases_childResource": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3611,7 +3721,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3680,7 +3790,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3749,7 +3859,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3820,7 +3930,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3889,7 +3999,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -3958,7 +4068,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -4029,7 +4139,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -4068,7 +4178,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "name": {
@@ -4107,7 +4217,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -4176,7 +4286,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-06-01-preview"
+            "2021-03-01-preview"
           ]
         },
         "identity": {
@@ -4316,7 +4426,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB Gremlin database."
@@ -4361,7 +4470,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB Gremlin graph."
@@ -4574,9 +4682,9 @@
             {
               "type": "string",
               "enum": [
-                "Consistent",
-                "Lazy",
-                "None"
+                "consistent",
+                "lazy",
+                "none"
               ]
             },
             {
@@ -4714,7 +4822,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB MongoDB collection."
@@ -4799,7 +4906,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB MongoDB database."
@@ -4999,6 +5105,66 @@
       },
       "description": "The set of data plane operations permitted through this Role Definition."
     },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Group id of the private endpoint."
+        },
+        "privateEndpoint": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointProperty"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Connection State of the Private Endpoint Connection."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the private endpoint."
+        }
+      },
+      "description": "Properties of a private endpoint connection."
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      },
+      "description": "Private endpoint which the connection belongs to."
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The private link service connection description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        }
+      },
+      "description": "Connection State of the Private Endpoint Connection."
+    },
     "RestoreParameters": {
       "type": "object",
       "properties": {
@@ -5124,7 +5290,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB container."
@@ -5132,6 +5297,17 @@
     "SqlContainerResource": {
       "type": "object",
       "properties": {
+        "analyticalStorageTtl": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Analytical TTL."
+        },
         "conflictResolutionPolicy": {
           "oneOf": [
             {
@@ -5224,7 +5400,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB SQL database."
@@ -5340,7 +5515,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB storedProcedure."
@@ -5389,7 +5563,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB trigger."
@@ -5471,7 +5644,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB userDefinedFunction."
@@ -5520,7 +5692,6 @@
         }
       },
       "required": [
-        "options",
         "resource"
       ],
       "description": "Properties to create and update Azure Cosmos DB Table."
