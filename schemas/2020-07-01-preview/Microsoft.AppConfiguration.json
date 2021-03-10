@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2019-11-01-preview/Microsoft.AppConfiguration.json#",
+  "id": "https://schema.management.azure.com/schemas/2020-07-01-preview/Microsoft.AppConfiguration.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.AppConfiguration",
   "description": "Microsoft AppConfiguration Resource Types",
@@ -10,7 +10,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-11-01-preview"
+            "2020-07-01-preview"
           ]
         },
         "identity": {
@@ -59,6 +59,9 @@
             "oneOf": [
               {
                 "$ref": "#/definitions/configurationStores_privateEndpointConnections_childResource"
+              },
+              {
+                "$ref": "#/definitions/configurationStores_keyValues_childResource"
               }
             ]
           }
@@ -106,13 +109,52 @@
       ],
       "description": "Microsoft.AppConfiguration/configurationStores"
     },
+    "configurationStores_keyValues": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-07-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Identifier of key and label combination. Key and label are joined by $ character. Label is optional."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/KeyValueProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "All key-value properties."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.AppConfiguration/configurationStores/keyValues"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.AppConfiguration/configurationStores/keyValues"
+    },
     "configurationStores_privateEndpointConnections": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-11-01-preview"
+            "2020-07-01-preview"
           ]
         },
         "name": {
@@ -179,13 +221,52 @@
       },
       "description": "The properties of a configuration store."
     },
+    "configurationStores_keyValues_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-07-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Identifier of key and label combination. Key and label are joined by $ character. Label is optional."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/KeyValueProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "All key-value properties."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "keyValues"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.AppConfiguration/configurationStores/keyValues"
+    },
     "configurationStores_privateEndpointConnections_childResource": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2019-11-01-preview"
+            "2020-07-01-preview"
           ]
         },
         "name": {
@@ -234,6 +315,35 @@
         }
       },
       "description": "The encryption settings for a configuration store."
+    },
+    "KeyValueProperties": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "The content type of the key-value's value.\r\nProviding a proper content-type can enable transformations of values when they are retrieved by applications."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "A dictionary of tags that can help identify what a key-value may be applicable for."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the key-value."
+        }
+      },
+      "description": "All key-value properties."
     },
     "KeyVaultProperties": {
       "type": "object",
