@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2020-04-15/Microsoft.Cdn.json#",
+  "id": "https://schema.management.azure.com/schemas/2020-09-01/Microsoft.Cdn.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Cdn",
   "description": "Microsoft Cdn Resource Types",
@@ -10,7 +10,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "etag": {
@@ -86,7 +86,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -114,6 +114,24 @@
             "oneOf": [
               {
                 "$ref": "#/definitions/profiles_endpoints_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_customDomains_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_afdEndpoints_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_originGroups_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_ruleSets_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_securityPolicies_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_secrets_childResource"
               }
             ]
           }
@@ -161,13 +179,160 @@
       ],
       "description": "Microsoft.Cdn/profiles"
     },
+    "profiles_afdEndpoints": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the endpoint under the profile which is unique globally."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDEndpointProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties required to create an endpoint."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_afdEndpoints_routes_childResource"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/afdEndpoints"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "location",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/afdEndpoints"
+    },
+    "profiles_afdEndpoints_routes": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the routing rule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RouteProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Routes to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/afdEndpoints/routes"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+    },
+    "profiles_customDomains": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the domain under the profile which is unique globally"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDDomainProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the domain to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/customDomains"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/customDomains"
+    },
     "profiles_endpoints": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -242,7 +407,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -281,7 +446,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -320,7 +485,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -352,9 +517,536 @@
         "type"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints/origins"
+    },
+    "profiles_originGroups": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the origin group which is unique within the endpoint."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDOriginGroupProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the origin group."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_originGroups_origins_childResource"
+              }
+            ]
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/originGroups"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/originGroups"
+    },
+    "profiles_originGroups_origins": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the origin that is unique within the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDOriginProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the origin."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/originGroups/origins"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/originGroups/origins"
+    },
+    "profiles_ruleSets": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the rule set under the profile which is unique globally"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_ruleSets_rules_childResource"
+              }
+            ]
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/ruleSets"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/ruleSets"
+    },
+    "profiles_ruleSets_rules": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the delivery rule which is unique within the endpoint."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Rules to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/ruleSets/rules"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/ruleSets/rules"
+    },
+    "profiles_secrets": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Secret under the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecretProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Secret to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/secrets"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/secrets"
+    },
+    "profiles_securityPolicies": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the security policy under the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecurityPolicyProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The json object that contains properties required to create a security policy"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Cdn/profiles/securityPolicies"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/securityPolicies"
     }
   },
   "definitions": {
+    "AFDDomainHttpsParameters": {
+      "type": "object",
+      "properties": {
+        "certificateType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "CustomerCertificate",
+                "ManagedCertificate"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Defines the source of the SSL certificate."
+        },
+        "minimumTlsVersion": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "TLS10",
+                "TLS12"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "TLS protocol version that will be used for Https."
+        },
+        "secret": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        }
+      },
+      "required": [
+        "certificateType"
+      ],
+      "description": "The JSON object that contains the properties to secure a domain."
+    },
+    "AFDDomainProperties": {
+      "type": "object",
+      "properties": {
+        "azureDnsZone": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The host name of the domain. Must be a domain name."
+        },
+        "tlsSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDDomainHttpsParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties to secure a domain."
+        }
+      },
+      "required": [
+        "hostName"
+      ],
+      "description": "The JSON object that contains the properties of the domain to create."
+    },
+    "AFDEndpointProperties": {
+      "type": "object",
+      "properties": {
+        "enabledState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'."
+        },
+        "originResponseTimeoutSeconds": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 16
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Send and receive timeout on forwarding request to the origin. When timeout is reached, the request fails and returns."
+        }
+      },
+      "description": "The JSON object that contains the properties required to create an endpoint."
+    },
+    "AFDOriginGroupProperties": {
+      "type": "object",
+      "properties": {
+        "healthProbeSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HealthProbeParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties to send health probes to origin."
+        },
+        "loadBalancingSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LoadBalancingSettingsParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Round-Robin load balancing settings for a backend pool"
+        },
+        "responseBasedAfdOriginErrorDetectionSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties to determine origin health using real requests/responses."
+        },
+        "sessionAffinityState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'."
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported."
+        }
+      },
+      "description": "The JSON object that contains the properties of the origin group."
+    },
+    "AFDOriginProperties": {
+      "type": "object",
+      "properties": {
+        "azureOrigin": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        },
+        "enabledState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint."
+        },
+        "httpPort": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The value of the HTTP port. Must be between 1 and 65535."
+        },
+        "httpsPort": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The value of the HTTPS port. Must be between 1 and 65535."
+        },
+        "originHostHeader": {
+          "type": "string",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint"
+        },
+        "priority": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5"
+        },
+        "sharedPrivateLinkResource": {
+          "type": "object",
+          "properties": {},
+          "description": "The properties of the private link resource for private origin."
+        },
+        "weight": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000"
+        }
+      },
+      "required": [
+        "hostName"
+      ],
+      "description": "The JSON object that contains the properties of the origin."
+    },
     "CacheExpirationActionParameters": {
       "type": "object",
       "properties": {
@@ -561,7 +1253,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -611,6 +1304,66 @@
         "hostName"
       ],
       "description": "The JSON object that contains the properties of the custom domain to create."
+    },
+    "CustomerCertificateParameters": {
+      "type": "object",
+      "properties": {
+        "certificateAuthority": {
+          "type": "string",
+          "description": "Certificate issuing authority."
+        },
+        "secretSource": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Version of the secret to be used"
+        },
+        "subjectAlternativeNames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The list of SANs."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "CustomerCertificate"
+          ]
+        },
+        "useLatestVersion": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to use the latest version for the certificate"
+        }
+      },
+      "required": [
+        "secretSource",
+        "type"
+      ],
+      "description": "Customer Certificate used for https"
     },
     "CustomRule": {
       "type": "object",
@@ -970,6 +1723,9 @@
         },
         {
           "$ref": "#/definitions/UrlSigningAction"
+        },
+        {
+          "$ref": "#/definitions/OriginGroupOverrideAction"
         },
         {
           "$ref": "#/definitions/UrlRewriteAction"
@@ -2126,6 +2882,60 @@
       ],
       "description": "Describes the parameters for using a user's KeyVault for URL Signing Key."
     },
+    "LoadBalancingSettingsParameters": {
+      "type": "object",
+      "properties": {
+        "additionalLatencyInMilliseconds": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket"
+        },
+        "sampleSize": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The number of samples to consider for load balancing decisions"
+        },
+        "successfulSamplesRequired": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The number of samples within the sample period that must succeed"
+        }
+      },
+      "description": "Round-Robin load balancing settings for a backend pool"
+    },
+    "ManagedCertificateParameters": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "ManagedCertificate"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Managed Certificate used for https"
+    },
     "ManagedRuleGroupOverride": {
       "type": "object",
       "properties": {
@@ -2378,6 +3188,67 @@
         "operator"
       ],
       "description": "Define match conditions"
+    },
+    "OriginGroupOverrideAction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "OriginGroupOverride"
+          ]
+        },
+        "parameters": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OriginGroupOverrideActionParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Defines the parameters for the origin group override action."
+        }
+      },
+      "required": [
+        "name",
+        "parameters"
+      ],
+      "description": "Defines the origin group override action for the delivery rule."
+    },
+    "OriginGroupOverrideActionParameters": {
+      "type": "object",
+      "properties": {
+        "@odata.type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "#Microsoft.Azure.Cdn.Models.DeliveryRuleOriginGroupOverrideActionParameters"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ]
+        },
+        "originGroup": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        }
+      },
+      "required": [
+        "@odata.type",
+        "originGroup"
+      ],
+      "description": "Defines the parameters for the origin group override action."
     },
     "OriginGroupProperties": {
       "type": "object",
@@ -2644,7 +3515,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -2687,13 +3559,150 @@
       "properties": {},
       "description": "The JSON object that contains the properties required to create a profile."
     },
+    "profiles_afdEndpoints_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the endpoint under the profile which is unique globally."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDEndpointProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties required to create an endpoint."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "properties": {}
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "afdEndpoints"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "location",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/afdEndpoints"
+    },
+    "profiles_afdEndpoints_routes_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the routing rule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RouteProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Routes to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "routes"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+    },
+    "profiles_customDomains_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the domain under the profile which is unique globally"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDDomainProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the domain to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "customDomains"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/customDomains"
+    },
     "profiles_endpoints_childResource": {
       "type": "object",
       "properties": {
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "location": {
@@ -2752,7 +3761,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -2791,7 +3800,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -2830,7 +3839,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2020-04-15"
+            "2020-09-01"
           ]
         },
         "name": {
@@ -2862,6 +3871,228 @@
         "type"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints/origins"
+    },
+    "profiles_originGroups_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the origin group which is unique within the endpoint."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDOriginGroupProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the origin group."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "originGroups"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/originGroups"
+    },
+    "profiles_originGroups_origins_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the origin that is unique within the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AFDOriginProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the origin."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "origins"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/originGroups/origins"
+    },
+    "profiles_ruleSets_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the rule set under the profile which is unique globally"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ruleSets"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/ruleSets"
+    },
+    "profiles_ruleSets_rules_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the delivery rule which is unique within the endpoint."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Rules to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "rules"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/ruleSets/rules"
+    },
+    "profiles_secrets_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Secret under the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecretProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The JSON object that contains the properties of the Secret to create."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "secrets"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/secrets"
+    },
+    "profiles_securityPolicies_childResource": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2020-09-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the security policy under the profile."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecurityPolicyProperties"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The json object that contains properties required to create a security policy"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "securityPolicies"
+          ]
+        }
+      },
+      "required": [
+        "apiVersion",
+        "name",
+        "properties",
+        "type"
+      ],
+      "description": "Microsoft.Cdn/profiles/securityPolicies"
     },
     "QueryStringMatchConditionParameters": {
       "type": "object",
@@ -2917,7 +4148,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3209,7 +4441,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3297,7 +4530,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3526,7 +4760,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3619,6 +4854,370 @@
       },
       "description": "The JSON object that contains the properties to determine origin health using real requests/responses."
     },
+    "RouteProperties": {
+      "type": "object",
+      "properties": {
+        "compressionSettings": {
+          "type": "object",
+          "properties": {},
+          "description": "compression settings."
+        },
+        "customDomains": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceReference"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Domains referenced by this endpoint."
+        },
+        "enabledState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'."
+        },
+        "forwardingProtocol": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "HttpOnly",
+                "HttpsOnly",
+                "MatchRequest"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Protocol this rule will use when forwarding traffic to backends."
+        },
+        "httpsRedirect": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic. Note that this is a easy way to set up this rule and it will be the first rule that gets executed."
+        },
+        "linkToDefaultDomain": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "whether this route will be linked to the default endpoint domain."
+        },
+        "originGroup": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        },
+        "originPath": {
+          "type": "string",
+          "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath."
+        },
+        "patternsToMatch": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The route patterns of the rule."
+        },
+        "queryStringCachingBehavior": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "IgnoreQueryString",
+                "UseQueryString",
+                "NotSet"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL."
+        },
+        "ruleSets": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceReference"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "rule sets referenced by this endpoint."
+        },
+        "supportedProtocols": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Http",
+                  "Https"
+                ]
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "List of supported protocols for this route."
+        }
+      },
+      "required": [
+        "originGroup"
+      ],
+      "description": "The JSON object that contains the properties of the Routes to create."
+    },
+    "RuleProperties": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeliveryRuleAction1"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "A list of actions that are executed when all the conditions of a rule are satisfied."
+        },
+        "conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeliveryRuleCondition"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "A list of conditions that must be matched for the actions to be executed"
+        },
+        "matchProcessingBehavior": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Continue",
+                "Stop"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "If this rule is a match should the rules engine continue running the remaining rules or stop. If not present, defaults to Continue."
+        },
+        "order": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied."
+        }
+      },
+      "required": [
+        "actions",
+        "order"
+      ],
+      "description": "The JSON object that contains the properties of the Rules to create."
+    },
+    "SecretParameters": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UrlSigningKeyParameters"
+        },
+        {
+          "$ref": "#/definitions/ManagedCertificateParameters"
+        },
+        {
+          "$ref": "#/definitions/CustomerCertificateParameters"
+        }
+      ],
+      "properties": {},
+      "description": "The json object containing secret parameters"
+    },
+    "SecretProperties": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecretParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The json object containing secret parameters"
+        }
+      },
+      "description": "The JSON object that contains the properties of the Secret to create."
+    },
+    "SecurityPolicyParameters": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallParameters"
+        }
+      ],
+      "properties": {},
+      "description": "The json object containing security policy parameters"
+    },
+    "SecurityPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecurityPolicyParameters"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "The json object containing security policy parameters"
+        }
+      },
+      "description": "The json object that contains properties required to create a security policy"
+    },
+    "SecurityPolicyWebApplicationFirewallAssociation": {
+      "type": "object",
+      "properties": {
+        "domains": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceReference"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "List of domains."
+        },
+        "patternsToMatch": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "List of paths"
+        }
+      },
+      "description": "settings for security policy patterns to match"
+    },
+    "SecurityPolicyWebApplicationFirewallParameters": {
+      "type": "object",
+      "properties": {
+        "associations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallAssociation"
+              }
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Waf associations"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "WebApplicationFirewall"
+          ]
+        },
+        "wafPolicy": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "The json object containing security policy waf parameters"
+    },
     "Sku": {
       "type": "object",
       "properties": {
@@ -3633,7 +5232,14 @@
                 "Standard_Akamai",
                 "Standard_ChinaCdn",
                 "Standard_Microsoft",
-                "Premium_ChinaCdn"
+                "Premium_ChinaCdn",
+                "Standard_AzureFrontDoor",
+                "Premium_AzureFrontDoor",
+                "Standard_955BandWidth_ChinaCdn",
+                "Standard_AvgBandWidth_ChinaCdn",
+                "StandardPlus_ChinaCdn",
+                "StandardPlus_955BandWidth_ChinaCdn",
+                "StandardPlus_AvgBandWidth_ChinaCdn"
               ]
             },
             {
@@ -3699,7 +5305,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3787,7 +5394,8 @@
                 "LessThan",
                 "LessThanOrEqual",
                 "GreaterThan",
-                "GreaterThanOrEqual"
+                "GreaterThanOrEqual",
+                "RegEx"
               ]
             },
             {
@@ -3876,7 +5484,8 @@
                 "LessThanOrEqual",
                 "GreaterThan",
                 "GreaterThanOrEqual",
-                "Wildcard"
+                "Wildcard",
+                "RegEx"
               ]
             },
             {
@@ -4136,24 +5745,6 @@
           ],
           "description": "Algorithm to use for URL signing."
         },
-        "ipSubnets": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
-            }
-          ],
-          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6)."
-        },
-        "keyId": {
-          "type": "string",
-          "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys"
-        },
         "parameterNameOverride": {
           "oneOf": [
             {
@@ -4170,7 +5761,7 @@
         }
       },
       "required": [
-        "keyId"
+        "@odata.type"
       ],
       "description": "Defines the parameters for the Url Signing action."
     },
@@ -4198,6 +5789,42 @@
         "keySourceParameters"
       ],
       "description": "Url signing key"
+    },
+    "UrlSigningKeyParameters": {
+      "type": "object",
+      "properties": {
+        "keyId": {
+          "type": "string",
+          "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash."
+        },
+        "secretSource": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/common/definitions.json#/definitions/expression"
+            }
+          ],
+          "description": "Reference to another resource."
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Version of the secret to be used"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "UrlSigningKey"
+          ]
+        }
+      },
+      "required": [
+        "keyId",
+        "secretSource",
+        "type"
+      ],
+      "description": "Url signing key parameters"
     },
     "UrlSigningParamIdentifier": {
       "type": "object",
